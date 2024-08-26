@@ -1,4 +1,20 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
+  // imageExtensions: ['png', 'jpg', 'jpeg', 'gif', 'svg'],
+}
 
-module.exports = nextConfig
+module.exports = {
+    nextConfig,
+    images: {
+        domains: ["localhost", "picsum.photos"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+        pathname: "**",
+      },
+    ],
+      }
+
+}
