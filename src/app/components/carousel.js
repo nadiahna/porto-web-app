@@ -1,115 +1,64 @@
-import { Carousel, Typography, Button } from "@material-tailwind/react";
+"use client";
+import { useState } from 'react';
+
+const testimonials = [
+  {
+    company: "Company Name",
+    website: "Website",
+    text: "Lorem ipsum dolor sit amet consectetur. Egestas cursus amet leo mi amet magnis sed. Ultrices varius eros id vulputate phasellus. Id sit magne faucibus ut. Lorem ipsum dolor sit amet consectetur. Egestas cursus amet leo mi amet magnis sed.",
+  },
+  {
+    company: "Company Name",
+    website: "Website",
+    text: "Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Praesent commodo cursus magna vel scelerisque nisl consectetur et.",
+  },
+  {
+    company: "Company Name",
+    website: "Website",
+    text: "Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis molestie dictum semper, nunc augue iaculis velit, a ornare odio metus a mi.",
+  },
+];
+
 export function CarouselWithContent() {
-    return (
-        <Carousel className="rounded-xl">
-            <div className="relative h-full w-full">
-                <img
-                    src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
-                    alt="image 1"
-                    className="h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/75">
-                    <div className="w-3/4 text-center md:w-2/4">
-                        <Typography
-                            variant="h1"
-                            color="white"
-                            className="mb-4 text-3xl md:text-4xl lg:text-5xl"
-                        >
-                            The Beauty of Nature
-                        </Typography>
-                        <Typography
-                            variant="lead"
-                            color="white"
-                            className="mb-12 opacity-80"
-                        >
-                            It is not so much for its beauty that the forest makes a claim
-                            upon men&apos;s hearts, as for that subtle something, that quality
-                            of air that emanation from old trees, that so wonderfully changes
-                            and renews a weary spirit.
-                        </Typography>
-                        <div className="flex justify-center gap-2">
-                            <Button size="lg" color="white">
-                                Explore
-                            </Button>
-                            <Button size="lg" color="white" variant="text">
-                                Gallery
-                            </Button>
-                        </div>
-                    </div>
-                </div>
+  const [current, setCurrent] = useState(0);
+
+  const prev = () => setCurrent((c) => (c === 0 ? testimonials.length - 1 : c - 1));
+  const next = () => setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1));
+
+  const visible = [
+    testimonials[current],
+    testimonials[(current + 1) % testimonials.length],
+  ];
+
+  return (
+    <div className="w-full max-w-4xl mx-auto mt-10">
+      <div className="flex gap-6">
+        {visible.map((t, i) => (
+          <div key={i} className="flex-1 bg-white rounded-xl p-6 text-dark-primary">
+            <div className="mb-4">
+              <p className="font-bold text-sm">{t.company}</p>
+              <p className="text-light-gray text-xs">{t.website}</p>
             </div>
-            <div className="relative h-full w-full">
-                <img
-                    src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-                    alt="image 2"
-                    className="h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 grid h-full w-full items-center bg-black/75">
-                    <div className="w-3/4 pl-12 md:w-2/4 md:pl-20 lg:pl-32">
-                        <Typography
-                            variant="h1"
-                            color="white"
-                            className="mb-4 text-3xl md:text-4xl lg:text-5xl"
-                        >
-                            The Beauty of Nature
-                        </Typography>
-                        <Typography
-                            variant="lead"
-                            color="white"
-                            className="mb-12 opacity-80"
-                        >
-                            It is not so much for its beauty that the forest makes a claim
-                            upon men&apos;s hearts, as for that subtle something, that quality
-                            of air that emanation from old trees, that so wonderfully changes
-                            and renews a weary spirit.
-                        </Typography>
-                        <div className="flex gap-2">
-                            <Button size="lg" color="white">
-                                Explore
-                            </Button>
-                            <Button size="lg" color="white" variant="text">
-                                Gallery
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="relative h-full w-full">
-                <img
-                    src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-                    alt="image 3"
-                    className="h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 grid h-full w-full items-end bg-black/75">
-                    <div className="w-3/4 pl-12 pb-12 md:w-2/4 md:pl-20 md:pb-20 lg:pl-32 lg:pb-32">
-                        <Typography
-                            variant="h1"
-                            color="white"
-                            className="mb-4 text-3xl md:text-4xl lg:text-5xl"
-                        >
-                            The Beauty of Nature
-                        </Typography>
-                        <Typography
-                            variant="lead"
-                            color="white"
-                            className="mb-12 opacity-80"
-                        >
-                            It is not so much for its beauty that the forest makes a claim
-                            upon men&apos;s hearts, as for that subtle something, that quality
-                            of air that emanation from old trees, that so wonderfully changes
-                            and renews a weary spirit.
-                        </Typography>
-                        <div className="flex gap-2">
-                            <Button size="lg" color="white">
-                                Explore
-                            </Button>
-                            <Button size="lg" color="white" variant="text">
-                                Gallery
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </Carousel>
-    );
+            <p className="text-sm text-light-gray leading-relaxed">{t.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex justify-center items-center gap-3 mt-8">
+        <button onClick={prev} className="text-white hover:text-primary transition-colors">
+          &#8592;
+        </button>
+        {testimonials.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`w-2 h-2 rounded-full transition-colors ${i === current ? 'bg-primary' : 'bg-white opacity-40'}`}
+          />
+        ))}
+        <button onClick={next} className="text-white hover:text-primary transition-colors">
+          &#8594;
+        </button>
+      </div>
+    </div>
+  );
 }
